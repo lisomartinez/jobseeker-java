@@ -1,4 +1,6 @@
-package ar.coders.jobseekercore;
+package ar.coders.jobseekercore.user.domain;
+
+import ar.coders.jobseekercore.ValueObject;
 
 public class UserEmail extends ValueObject<String> {
     public UserEmail(String value) {

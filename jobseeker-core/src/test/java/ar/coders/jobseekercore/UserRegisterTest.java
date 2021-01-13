@@ -1,5 +1,12 @@
 package ar.coders.jobseekercore;
 
+import ar.coders.jobseekercore.user.application.UserCreationPort;
+import ar.coders.jobseekercore.user.application.UserRegister;
+import ar.coders.jobseekercore.user.domain.UserEmail;
+import ar.coders.jobseekercore.user.domain.UserFirstName;
+import ar.coders.jobseekercore.user.domain.UserId;
+import ar.coders.jobseekercore.user.domain.UserLastName;
+import ar.coders.jobseekercore.user.ports.UserRepository;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +26,7 @@ public class UserRegisterTest {
 
     @Test
     void canRegisterUser() {
-        UserRegister userRegister = new UserRegister(userRepository);
+        UserCreationPort userRegister = new UserRegister(userRepository);
         UserId id = UserId.of(UUID.randomUUID().toString());
         userRegister.register(id,
                               UserFirstName.of("Lisandro"),
@@ -30,14 +37,14 @@ public class UserRegisterTest {
 
     @Test
     void whenCreatedHasNoUsers() {
-        UserRegister userRegister = new UserRegister(userRepository);
+        UserCreationPort userRegister = new UserRegister(userRepository);
         UserId id = UserId.of(UUID.randomUUID().toString());
         assertThat(userRegister.isRegistered(id)).isFalse();
     }
 
     @Test
     void canRegisterMultipleUsers() {
-        UserRegister userRegister = new UserRegister(userRepository);
+        UserCreationPort userRegister = new UserRegister(userRepository);
         UserId id = UserId.of(UUID.randomUUID().toString());
         UserId otherId = UserId.of(UUID.randomUUID().toString());
         userRegister.register(id,
@@ -56,7 +63,7 @@ public class UserRegisterTest {
 
     @Test
     void cannotRegisterUserMoreThanOnce() {
-        UserRegister userRegister = new UserRegister(userRepository);
+        UserCreationPort userRegister = new UserRegister(userRepository);
         UserId id = UserId.of(UUID.randomUUID().toString());
         userRegister.register(id,
                               UserFirstName.of("Lisandro"),
@@ -71,7 +78,7 @@ public class UserRegisterTest {
 
     }
 
-    private ThrowableAssert.ThrowingCallable registerDuplicatedUser(UserRegister userRegister, UserId id) {
+    private ThrowableAssert.ThrowingCallable registerDuplicatedUser(UserCreationPort userRegister, UserId id) {
         return () -> userRegister.register(id,
                                            UserFirstName.of("Lisandro"),
                                            UserLastName.of("Martinez"),

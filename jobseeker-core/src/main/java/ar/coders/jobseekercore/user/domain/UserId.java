@@ -1,4 +1,7 @@
-package ar.coders.jobseekercore;
+package ar.coders.jobseekercore.user.domain;
+
+import ar.coders.jobseekercore.DomainException;
+import ar.coders.jobseekercore.Id;
 
 import java.util.UUID;
 

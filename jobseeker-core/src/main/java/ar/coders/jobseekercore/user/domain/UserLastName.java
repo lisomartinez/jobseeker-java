@@ -1,4 +1,6 @@
-package ar.coders.jobseekercore;
+package ar.coders.jobseekercore.user.domain;
+
+import ar.coders.jobseekercore.ValueObject;
 
 public class UserLastName extends ValueObject<String> {
     public UserLastName(String value) {

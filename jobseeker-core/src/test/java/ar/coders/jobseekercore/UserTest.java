@@ -1,5 +1,6 @@
 package ar.coders.jobseekercore;
 
+import ar.coders.jobseekercore.user.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;

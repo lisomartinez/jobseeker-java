@@ -1,5 +1,9 @@
 package ar.coders.jobseekercore;
 
+import ar.coders.jobseekercore.user.domain.User;
+import ar.coders.jobseekercore.user.domain.UserId;
+import ar.coders.jobseekercore.user.ports.UserRepository;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

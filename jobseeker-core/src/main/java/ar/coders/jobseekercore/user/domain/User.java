@@ -1,4 +1,4 @@
-package ar.coders.jobseekercore;
+package ar.coders.jobseekercore.user.domain;
 
 public class User {
     private final UserId id;
