@@ -10,38 +10,47 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 class UserTest {
     @Test
     void knowsItsIdentifier() {
-        String userId = UUID.randomUUID().toString();
-        User user = User.identifiedAs(userId);
+        UserId userId = UserId.of(UUID.randomUUID().toString());
+        User user = createUser(userId);
+
         assertThat(user.isIdentifiedAs(userId)).isTrue();
+    }
+
+    private User createUser(UserId userId) {
+        return User.from(userId,
+                         UserFirstName.of("Lisandro"),
+                         UserLastName.of("Martinez"),
+                         UserEmail.of("lisandro@company.com"));
     }
 
     @Test
     void knowIfItsNotHerIdentifier() {
-        String userId = UUID.randomUUID().toString();
-        User user = User.identifiedAs(userId);
-        assertThat(user.isIdentifiedAs(UUID.randomUUID().toString())).isFalse();
+        UserId userId = UserId.of(UUID.randomUUID().toString());
+        UserId otherId = UserId.of(UUID.randomUUID().toString());
+
+        User user = createUser(userId);
+
+        assertThat(user.isIdentifiedAs(otherId)).isFalse();
     }
 
     @Test
     void userIdentifierHasUUIDFormat() {
-        String userId = "other format";
         assertThatExceptionOfType(DomainException.class)
-                .isThrownBy(() -> User.identifiedAs(userId))
+                .isThrownBy(() -> UserId.of("other format"))
                 .withMessage("User identifier should have UUID format");
     }
 
     @Test
     void cannotBeCreatedWithBlankIdentifier() {
-        String userId = "  ";
         assertThatExceptionOfType(DomainException.class)
-                .isThrownBy(() -> User.identifiedAs(userId))
+                .isThrownBy(() -> UserId.of("  "))
                 .withMessage("User identifier cannot be blank");
     }
 
     @Test
     void cannotBeCreatedWithNullIdentifier() {
         assertThatExceptionOfType(DomainException.class)
-                .isThrownBy(() -> User.identifiedAs(null))
+                .isThrownBy(() -> UserId.of(null))
                 .withMessage("User identifier cannot be null");
     }
 }

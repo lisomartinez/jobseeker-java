@@ -1,30 +1,29 @@
 package ar.coders.jobseekercore;
 
-import java.util.UUID;
-
 public class User {
-    private String identifier;
+    private final UserId id;
+    private final UserFirstName firstName;
+    private final UserLastName lastName;
+    private final UserEmail email;
 
-    public User(String identifier) {
-        this.identifier = identifier;
+
+    public User(UserId id, UserFirstName firstName, UserLastName lastName, UserEmail email) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
     }
 
-    public static User identifiedAs(String identifier) {
-        assertIdentifierHasUUIDFormat(identifier);
-        return new User(identifier);
+
+    public static User from(UserId id, UserFirstName firstName, UserLastName lastName, UserEmail email) {
+        return new User(id, firstName, lastName, email);
     }
 
-    private static void assertIdentifierHasUUIDFormat(String identifier) {
-        if (identifier == null) throw new DomainException("User identifier cannot be null");
-        if (identifier.isBlank()) throw new DomainException("User identifier cannot be blank");
-        try {
-            UUID.fromString(identifier);
-        } catch (IllegalArgumentException e) {
-            throw new DomainException("User identifier should have UUID format");
-        }
+    public boolean isIdentifiedAs(UserId userId) {
+        return id.equals(userId);
     }
 
-    public boolean isIdentifiedAs(String userId) {
-        return identifier.equals(userId);
+    public UserId id() {
+        return id;
     }
 }
