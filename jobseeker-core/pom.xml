@@ -10,7 +10,7 @@
 
     <artifactId>jobseeker-core</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
     <name>${project.groupId}.${project.artifactId}</name>
+    <packaging>jar</packaging>
 
 </project>

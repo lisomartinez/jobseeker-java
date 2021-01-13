@@ -17,6 +17,7 @@
 
     <modules>
         <module>jobseeker-core</module>
+        <module>jobseeker-adapters</module>
     </modules>
 
     <properties>
