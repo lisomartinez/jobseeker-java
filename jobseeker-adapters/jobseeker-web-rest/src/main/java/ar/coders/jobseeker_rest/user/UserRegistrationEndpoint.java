@@ -6,6 +6,13 @@ import ar.coders.jobseeker_core.user.domain.UserEmail;
 import ar.coders.jobseeker_core.user.domain.UserFirstName;
 import ar.coders.jobseeker_core.user.domain.UserId;
 import ar.coders.jobseeker_core.user.domain.UserLastName;
+import ar.coders.jobseeker_rest.exceptions.ErrorMessage;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +28,21 @@ public class UserRegistrationEndpoint {
         this.userCreator = userCreator;
     }
 
+    @Operation(summary = "Register a user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User created"),
+            @ApiResponse(responseCode = "400", description = "User already registered",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = ErrorMessage.class),
+                                    examples = @ExampleObject(value = "{\n" +
+                                            "    \"statusCode\": 400,\n" +
+                                            "    \"route\": \"http://localhost:8080/users\",\n" +
+                                            "    \"method\": \"POST\",\n" +
+                                            "    \"message\": \"User already registered\"\n" +
+                                            "}"))
+                    })
+    })
     @PostMapping("/users")
     public ResponseEntity<Void> register(@RequestBody UserRegistrationRequest userRegistrationRequest) {
         UserId id = UserId.of(userRegistrationRequest.getId());

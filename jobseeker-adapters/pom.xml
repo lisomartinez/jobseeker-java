@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ar.coders</groupId>
+        <artifactId>jobseeker</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>jobseeker-adapters</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>jobseeker-adapters</name>
+    <packaging>pom</packaging>
+    <modules>
+        <module>jobseeker-web-rest</module>
+        <module>jobseeker-persistence-jpa</module>
+    </modules>
+</project>

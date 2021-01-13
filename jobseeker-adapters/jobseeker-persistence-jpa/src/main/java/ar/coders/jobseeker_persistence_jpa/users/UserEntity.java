@@ -1,6 +1,7 @@
 package ar.coders.jobseeker_persistence_jpa.users;
 
 import ar.coders.jobseeker_core.user.domain.*;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,10 +17,19 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @NotNull
     @Column(unique = true)
     private String userId;
+
+    @NotNull
+    @Column(length = 50)
     private String firstName;
+
+    @NotNull
+    @Column(length = 50)
     private String lastName;
+
+    @NotNull
     private String email;
 
     public UserEntity(String userId, String firstName, String lastName, String email) {
